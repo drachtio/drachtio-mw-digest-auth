@@ -1,0 +1,19 @@
+version: '2.1'
+
+networks:
+  testbed:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.22.0.0/16
+
+services:
+
+  drachtio:
+    image: drachtio/drachtio-server:latest
+    command: drachtio --contact "sip:*;transport=udp" --loglevel debug --sofia-loglevel 9
+    ports:
+      - "9062:9022/tcp"
+    networks:
+      testbed:
+        ipv4_address: 172.22.0.10

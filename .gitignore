@@ -2,6 +2,8 @@
 logs
 *.log
 
+.eslint*
+
 # Runtime data
 pids
 *.pid
