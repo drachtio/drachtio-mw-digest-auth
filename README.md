@@ -1,4 +1,8 @@
 # drachtio-mw-digest-auth
+[![Build Status](https://secure.travis-ci.org/davehorton/drachtio-mw-digest-auth.png)](http://travis-ci.org/davehorton/drachtio-mw-digest-auth) [![NPM version](https://badge.fury.io/js/drachtio-mw-digest-auth.svg)](http://badge.fury.io/js/drachtio-mw-digest-auth)
+
+[![drachtio logo](http://davehorton.github.io/drachtio-srf/img/definition-only-cropped.png)](http://davehorton.github.io/drachtio-srf)
+
 Performs SIP Digest-based authentication for a user agent server (UAS) or proxy built using [drachtio-srf](https://github.com/davehorton/drachtio-srf)
 
 
