@@ -16,7 +16,8 @@
     "drachtio",
     "sip",
     "auth",
-    "digest"
+    "digest",
+    "RFC2617"
   ],
   "author": "Dave Horton",
   "license": "MIT",
