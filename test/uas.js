@@ -135,6 +135,18 @@ test('digest auth', (t) => {
       return uas.disconnect();
     })
 
+    // 401 Unauthorized: Authorization header with empty nonce and response
+    .then(() => {
+      uas = new Uas();
+      return uas.authRegister('dhorton', 'pass123', 'drachtio.org');
+    })
+    .then((uas) => {
+      return sippUac('uac-auth-register-bria-weirdness.xml');
+    })
+    .then(() => {
+      t.pass('401 response to REGISTER when empty credentials supplied');
+      return uas.disconnect();
+    })
 
     .then(() => {
       return t.end();
