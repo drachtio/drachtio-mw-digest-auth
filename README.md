@@ -6,7 +6,7 @@ Performs SIP Digest-based authentication for a user agent server (UAS) or proxy 
 
 ## Usage
 
-Install this as drachtio middleware, providing an object that specifies the sip realm to use in challenges, and a function that provides (via callback) the password for a given username and sip realm.
+Install this as drachtio middleware, providing an object that (optionally) specifies the sip realm to use in challenges, and a function that provides (via callback) the password for a given username and sip realm.
 ```js
 const Srf = require('drachtio-srf');
 const srf = new Srf() ;
@@ -70,8 +70,26 @@ Realm can be provided as a static value in the middleware configuration, but if 
 ```js
 const challenge = digestAuth({
   realm: (req) => {
-    return lookupRealm(req.uri);  // must return a promise resolving to a realm value to us
+    return lookupRealm(req.uri);  // must return either a string or a promise
   }),
   ...
 });
 ```
+### building a registrar for specified domain(s)
+You may want to build a registrar that only handles certain domains, and rejects all 
+other requests.  To do so, simply return a null or undefined value from your 'realm' function
+```js
+const parseUri = require('drachtio-srf').parseUri;
+const challenge = digestAuth({
+  realm: (req) => {
+    const uri = parseUri(req.uri);
+    if (['my.first.domain', 'my.second.domain'].includes(uri.host)) return uri.host;
+    return null;
+  }),
+  ...
+});
+```
+
+### realm is optional, so what if I don't supply it?
+In that case, the challenge will use the domain in the Request-URI of the INVITE or REGISTER as the realm value
+in the challenge

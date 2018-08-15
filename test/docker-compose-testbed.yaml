@@ -16,4 +16,4 @@ services:
       - "9062:9022/tcp"
     networks:
       testbed:
-        ipv4_address: 172.22.0.10
+        ipv4_address: 172.22.0.2
