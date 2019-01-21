@@ -7,6 +7,7 @@ Performs SIP Digest-based authentication for a user agent server (UAS) or proxy 
 ## Usage
 
 Install this as drachtio middleware, providing an object that (optionally) specifies the sip realm to use in challenges, and a function that provides (via callback) the password for a given username and sip realm.
+> Note: in your callback function, if an unknown/invalid username is provided, simply return null for the password to indicate that a 403 Forbidden response should be generated.
 ```js
 const Srf = require('drachtio-srf');
 const srf = new Srf() ;

@@ -16,7 +16,7 @@ class App extends Emitter {
       proxy: proxy,
       realm: domain,
       passwordLookup: (username, realm, callback) => {
-        if (user !== username) callback(new Error('unknown user'));
+        if (user !== username) return callback(null, null);
         else callback(null, password) ;
       }
     })) ;

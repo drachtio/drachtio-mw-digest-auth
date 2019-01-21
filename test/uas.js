@@ -35,7 +35,7 @@ test('digest auth', (t) => {
       return uas.disconnect();
     })
 
-    // 403 Forbidden: invalid credentials
+    // 403 Forbidden: invalid password
     .then(() => {
       uas = new Uas();
       return uas.authInvite('dhorton', 'badpass', getDomainFromRequestUri);
@@ -45,6 +45,19 @@ test('digest auth', (t) => {
     })
     .then(() => {
       t.pass('403 Forbidden response to INVITE when invalid credentials supplied');
+      return uas.disconnect();
+    })
+
+    // 403 Forbidden: unknown username
+    .then(() => {
+      uas = new Uas();
+      return uas.authInvite('jdoe', 'badpass', getDomainFromRequestUri);
+    })
+    .then((uas) => {
+      return sippUac('uac-auth-invite-fail-unknown-user.xml');
+    })
+    .then(() => {
+      t.pass('401 when unknown user supplied');
       return uas.disconnect();
     })
 
