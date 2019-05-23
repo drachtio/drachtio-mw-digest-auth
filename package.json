@@ -1,6 +1,6 @@
 {
   "name": "drachtio-mw-digest-auth",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Performs SIP Digest-based authentication",
   "main": "index.js",
   "scripts": {
