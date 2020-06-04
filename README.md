@@ -94,3 +94,16 @@ const challenge = digestAuth({
 ### realm is optional, so what if I don't supply it?
 In that case, the challenge will use the domain in the Request-URI of the INVITE or REGISTER as the realm value
 in the challenge
+
+### Use precomputed hashed passwords, instead of plaintext
+Your password database can store passwords in plain text or as precomputed hashes. Using precomputed hashes adds a layer of security to your application. In order to use precomputed hashes, they should be stored according to RFC2617, using `MD5( username ":" realm ":" password )`. To enable this functionality `passwordLookup()` should return an object like this `{ha1: "YOUR_HASHED_PASSWORD"}`
+
+```js
+const challenge = digestAuth({
+  realm: 'sip.drachtio.org',
+  passwordLookup: function(username, realm, callback) {
+    // ..lookup hashed password for username in realm
+    return callback(null, {ha1: "YOUR_HASHED_PASSWORD"}) ;
+  }
+}) ;
+```
