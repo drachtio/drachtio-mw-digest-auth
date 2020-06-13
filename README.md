@@ -113,10 +113,11 @@ When using digest auth with drachtio-srf in outbound mode, you can pass `srf` as
 
 ```js
 const challenge = digestAuth({
+  srf: srf,
   realm: 'sip.drachtio.org',
   passwordLookup: function(username, realm, callback) {
-    // ..lookup hashed password for username in realm
-    return callback(null, {ha1: "YOUR_HASHED_PASSWORD"}) ;
+    // ..lookup password for username in realm
+    return callback(null, password) ;
   }
 }) ;
 ```
