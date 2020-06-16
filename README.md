@@ -107,3 +107,17 @@ const challenge = digestAuth({
   }
 }) ;
 ```
+
+### Using w/ "outbound mode" 
+When using digest auth with drachtio-srf in outbound mode, you can pass `srf` as an opt to `digestAuth()`, and the middleware will run `srf.endSession(req)` with a 401, 403, or 407.
+
+```js
+const challenge = digestAuth({
+  srf: srf,
+  realm: 'sip.drachtio.org',
+  passwordLookup: function(username, realm, callback) {
+    // ..lookup password for username in realm
+    return callback(null, password) ;
+  }
+}) ;
+```
